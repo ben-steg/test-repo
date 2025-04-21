@@ -1,16 +1,30 @@
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Deployment environment"
+        required: true
+        type: choice
+        options:
+          - ptero
+  push:
+    - main
+    - dev
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
-    environment: ptero
+    # environment: ${{ github.event.inputs.environment || (github.ref_name == 'main' && 'production') || (github.ref_name == 'develop' && 'staging') }}
+    environment: ${{ github.event.inputs.environment }}
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - name: Check out repository code
         uses: actions/checkout@v4
+      - name: Show Environment
+        run: echo "Deploying to ${{ job.environment.name }}"
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - run: echo "Find the frontend at ${{vars.WEBAPP_URL}}"
