@@ -1,4 +1,4 @@
-name: GitHub Actions Demo
+name: Deploy App
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on:
   workflow_dispatch:
@@ -9,11 +9,8 @@ on:
         type: choice
         options:
           - ptero
-  push:
-    - main
-    - dev
 jobs:
-  Explore-GitHub-Actions:
+  Deploy-App:
     runs-on: ubuntu-latest
     # environment: ${{ github.event.inputs.environment || (github.ref_name == 'main' && 'production') || (github.ref_name == 'develop' && 'staging') }}
     environment: ${{ github.event.inputs.environment }}
