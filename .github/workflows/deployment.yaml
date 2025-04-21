@@ -30,6 +30,7 @@ jobs:
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
   Deploy-to-primary:
+    needs: Deploy-App
     uses: ./.github/workflows/region.yaml
     with:
       environment: ${{ inputs.environment }}
