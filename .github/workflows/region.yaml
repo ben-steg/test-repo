@@ -14,7 +14,7 @@ on:
 
 jobs:
   Deploy-App:
-    runs-on: ubuntu-latest
+    # runs-on: ubuntu-latest
     # environment: ${{ github.event.inputs.environment || (github.ref_name == 'main' && 'production') || (github.ref_name == 'develop' && 'staging') }}
     environment: ${{ github.event.inputs.environment }}
     steps:
