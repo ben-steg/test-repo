@@ -32,13 +32,13 @@ jobs:
   Deploy-to-primary:
     uses: ./.github/workflows/region.yaml
     with:
-      target_env: ${{ inputs.environment }}
+      environment: ${{ inputs.environment }}
       region: "us-east-1"
     secrets: inherit
   Deploy-to-secondary:
     needs: Deploy-to-primary
     uses: ./.github/workflows/region.yaml
     with:
-      target_env: ${{ inputs.environment }}
+      environment: ${{ inputs.environment }}
       region: "us-west-2"
     secrets: inherit

@@ -3,19 +3,17 @@ run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on:
   workflow_call:
     inputs:
-      target_env:
+      environment:
         required: true
         type: string
       region:
         required: true
-        type: string
-    secrets:
-      inherit: true
+        type: string      
 
 jobs:
   Deploy-App:
-    # runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
     # environment: ${{ github.event.inputs.environment || (github.ref_name == 'main' && 'production') || (github.ref_name == 'develop' && 'staging') }}
-    environment: ${{ github.event.inputs.environment }}
+    environment: ${{ inputs.environment }}
     steps:
       - run: echo "This is deploying to ${{ inputs.REGION }}"
